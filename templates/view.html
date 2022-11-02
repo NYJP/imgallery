@@ -1,0 +1,74 @@
+{% extends "template.html" %}
+
+{% block title %}
+Online Photo Album
+{% endblock %}
+
+{% block html %}
+<!-- Set the properties of the whole page -->
+<html style=
+"background-color: {% if data['styles']['backgroundcolour'] != 'none' %} rgb({{data['styles']['backgroundcolour']}}) {% else %} rgba(0,0,0,0) {% endif %}">
+{% endblock %}
+
+{% block style %}
+  <!-- Select the format style indicated in the data -->
+  {% if data['styles']['layout'] == 'one column' %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='singleview.css') }}">
+  {% else %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='doubleview.css') }}">
+  {% endif %}
+{% endblock %}
+
+{%block heading%}
+  <!-- Header properties -->
+  <h1 style = "font-size: {{data['styles']['titlesize']}}; color:  {% if data['styles']['titlecolour'] != 'none' %} rgb({{data['styles']['titlecolour']}}) {% else %} rgba(0,0,0,0) {% endif %}; margin:10px;">{{title}}</h1>
+  <!-- Return button -->
+  <a href="{{ url_for('mainroot') }}" style = "color:  {% if data['styles']['titlecolour'] != 'none' %} rgb({{data['styles']['titlecolour']}}) {% else %} rgba(0,0,0,0) {% endif %}">Return to homepage</a>
+{%endblock%}
+
+{% block body %}
+<br><br>
+<table>
+  {% if data['styles']['layout'] == 'one column' %}
+    <!-- For single column format -->
+    {% for i in range(data['no_images']) %}
+        <tr>
+          <!-- Image properties -->
+          <img class = 'images' src = "{{data['images'][i]}}" style = "border-color: {% if data['styles']['imagebordercolour'] != 'none' %} rgb({{data['styles']['imagebordercolour']}}) {% else %} rgba(0,0,0,0) {% endif %}">
+          <!-- Caption properties -->
+          <div class = 'caption' style = "font-size: {{data['styles']['captionsize']}}; color: {% if data['styles']['captionfontcolour'] != 'none' %} rgb({{data['styles']['captionfontcolour']}}) {% else %} rgba(0,0,0,0) {% endif %}; background-color: {% if data['styles']['captionbackgroundcolour'] != 'none' %} rgb({{data['styles']['captionbackgroundcolour']}}) {% else %} rgba(0,0,0,0) {% endif %}; border-color: {% if data['styles']['captionbordercolour'] != 'none' %} rgb({{data['styles']['captionbordercolour']}}) {% else %} rgba(0,0,0,0) {% endif %}">{{data['captions'][i]}}</div>
+        </tr>
+    {% endfor %}
+  {% else %}
+    <!-- For double column format -->
+    {% for i in range(data['no_images']) %}
+      {% if i%2 == 0 %} <!-- This is so comments and images alternate spaces -->
+        <tr>
+          <td><div class = 'caption' style = "font-size: {{data['styles']['captionsize']}}; color: {% if data['styles']['captionfontcolour'] != 'none' %} rgb({{data['styles']['captionfontcolour']}}) {% else %} rgba(0,0,0,0) {% endif %}; background-color: {% if data['styles']['captionbackgroundcolour'] != 'none' %} rgb({{data['styles']['captionbackgroundcolour']}}) {% else %} rgba(0,0,0,0) {% endif %}; border-color: {% if data['styles']['captionbordercolour'] != 'none' %} rgb({{data['styles']['captionbordercolour']}}) {% else %} rgba(0,0,0,0) {% endif %}">{{data['captions'][i]}}</div></td>
+
+          <td><img class = 'images' src = "{{data['images'][i]}}" style = "border-color: {% if data['styles']['imagebordercolour'] != 'none' %} rgb({{data['styles']['imagebordercolour']}}) {% else %} rgba(0,0,0,0) {% endif %}"></td>
+        </tr>
+      {% else %}
+        <tr>
+          <td><img class = 'images' src = "{{data['images'][i]}}" style = "border-color: {% if data['styles']['imagebordercolour'] != 'none' %} rgb({{data['styles']['imagebordercolour']}}) {% else %} rgba(0,0,0,0) {% endif %}"></td>
+
+          <td><div class = 'caption' style = "font-size: {{data['styles']['captionsize']}}; color: {% if data['styles']['captionfontcolour'] != 'none' %} rgb({{data['styles']['captionfontcolour']}}) {% else %} rgba(0,0,0,0) {% endif %}; background-color: {% if data['styles']['captionbackgroundcolour'] != 'none' %} rgb({{data['styles']['captionbackgroundcolour']}}) {% else %} rgba(0,0,0,0) {% endif %}; border-color: {% if data['styles']['captionbordercolour'] != 'none' %} rgb({{data['styles']['captionbordercolour']}}) {% else %} rgba(0,0,0,0) {% endif %}">{{data['captions'][i]}}</div></td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+</table>
+
+{%endblock%}
+
+{% block java %}
+  <!-- Select the JS file for chosen format -->
+  {% if data['styles']['layout'] == 'one column' %}
+    <script src="{{ url_for('static', filename='singleview.js') }}"></script>
+  {% else %}
+    <script src="{{ url_for('static', filename='doubleview.js') }}"></script>
+  {% endif %}
+{%endblock%}
+
+
+

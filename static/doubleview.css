@@ -1,0 +1,48 @@
+/* CSS for album viewing in the double column format */
+
+
+img{
+  border: solid black 2px;
+}
+
+/* Landscape images are sized by width */
+.land{
+  width: 90%;
+  margin:5%;
+}
+
+table{
+  width:100%;
+}
+
+/* Landscape images are sized by height */
+.port{
+  height: 80vh;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.caption{
+  width: 85%;
+  display: block;
+  font-size:18px;
+  text-align: left;
+  margin: 1vw;
+  margin-top:1vh;
+  margin-bottom:4vh;
+  border: solid black 2px;
+  padding:1vw;
+}
+
+/* Each of the two columns are 50% width of the viewport */
+td{
+  width:50%;
+}
+
+html{
+  font-family: sans-serif;
+  padding:0;
+  width: 100%;
+  float:left;
+  text-align: center;
+}

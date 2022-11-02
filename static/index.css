@@ -1,0 +1,15 @@
+/* CSS for the main page */
+
+
+html{
+  font-family: sans-serif;
+}
+
+table{
+  width:100%;
+  text-align: center;
+}
+
+td{
+  padding:20px;
+}

@@ -1,0 +1,19 @@
+{% block html %}
+<!-- This block is so the view page may edit the html tag's style properties for background colour -->
+<html>
+{% endblock %}
+  <head>
+    <title>{% block title %} Default title {% endblock %}</title>
+    {% block style %}<link rel="stylesheet" href="">{% endblock %}
+  </head>
+  <body>
+    <!-- This block includes the <h1> tags si the view page can modify the style properties, namely size and colour -->
+    {% block heading %} <h1>Default Heading</h1> {% endblock %}
+
+    {% block body %}
+    Content
+    {% endblock %}
+    
+    {% block java %}<script src=""></script>{%endblock%}
+  </body>
+</html>

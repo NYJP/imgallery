@@ -1,0 +1,84 @@
+/* CSS for album editing page */
+
+
+html{
+  font-family: sans-serif;
+}
+
+/* Formats the main display area for uploaded or existing images */
+#display{
+  float:left;
+  padding-bottom: 40px;
+  width:100%;
+}
+
+form{
+  width:100%;
+}
+
+table{
+  width:100%;
+  text-align: center;
+}
+
+td{
+  padding-bottom:25px;
+}
+
+.lasttd{
+  padding-bottom:50px;
+}
+
+/* Ensures the display icons for each image are regular and that images are presented fully */
+.displayimg{
+  position: relative;
+  float:left;
+  width: 300px;
+  height: 300px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin:10px;
+  border: 2px dotted black;
+  border-radius: 20px;
+  background-color: rgb(230, 230, 230);
+  margin-bottom: 40px;
+}
+
+/*
+Ensures the delete button for each display icon is in the right postion and has hover animations
+*/
+.displaydel{
+  position: absolute;
+  top:-2px;
+  left:-2px;
+  height:30px;
+  width:30px;
+  background-color: Transparent;
+  border: none;
+  font-size: 25px;
+  font-family: monospace;
+  font-weight: bold;
+  opacity: 0.5;
+}
+
+.displaydel:hover{
+ opacity: 1.0;
+}
+
+.captions{
+  width:300px;
+  height:20px;
+  position: absolute;
+  bottom:-30px;
+  left:0;
+}
+
+#submit{
+  position: relative;
+  display: inline;
+}
+
+form{
+  position: absolute;
+}

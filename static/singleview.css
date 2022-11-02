@@ -1,0 +1,40 @@
+/* CSS for album viewing in the single column format */
+
+
+img{
+  display:inline-block;
+  border: solid black 2px;
+}
+
+/* Landscape images are sized by width */
+.land{
+  width: 80%;
+}
+
+/* Landscape images are sized by height */
+.port{
+  height: 80vh;
+}
+
+table{
+  width:100%;
+}
+
+.caption{
+  width: 85%;
+  display: inline-block;
+  font-size:18px;
+  text-align: left;
+  margin-top:1vh;
+  margin-bottom:4vh;
+  border: solid black 2px;
+  padding:1vw;
+}
+
+html{
+  font-family: sans-serif;
+  float:left;
+  text-align: center;
+  padding:0;
+  width: 100%;
+}

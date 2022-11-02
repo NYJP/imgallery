@@ -1,0 +1,59 @@
+{% extends "template.html" %}
+
+{% block title %}
+Online Photo Album
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+{% endblock %}
+
+{%block heading%}
+<h1>Online photo album maker</h1>
+{%endblock%}
+
+{% block body %}
+Title:<br>
+<!-- Creating or editing an album -->
+<form action="{{ url_for('editroot') }}" method="POST">
+  <input type ='text' name='title'>
+  <input type='submit' id='submit'>
+</form>
+
+Enter the name of an existing album to edit it, or the name of a new album to create it
+<br><br>
+<!-- List of existing albums -->
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Images</th>
+  </tr>
+
+  {% for i in data %}
+  <tr>
+    <td>{{data[i]['title']}}</td>
+    <td>{{data[i]['no_images']}}</td>
+    <td>
+      <!-- Form for direct album viewing -->
+      <form action="{{ url_for('viewroot') }}" method="POST">
+        <input type = 'submit' id = 'view' value = 'View'>
+        <!-- Hidden input for album name -->
+        <input type = 'text' id = 'tobeview' name = 'tobeview' value = "{{data[i]['title']}}" style = 'display: none;'>
+      </form>
+    </td>
+    <td>
+      <!-- Form for album deletion -->
+      <form action="/" method="POST">
+        <input type = 'submit' id = 'delete' value = 'Delete'>
+        <!-- Hidden input for album name -->
+        <input type = 'text' id = 'tobedel' name = 'tobedel' value = "{{data[i]['title']}}" style = 'display: none;'>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{%endblock%}
+
+{% block java %}
+
+{%endblock%}

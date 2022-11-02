@@ -1,0 +1,22 @@
+{% extends "template.html" %}
+
+{% block title %}
+No Album
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='error.css') }}">
+{% endblock %}
+
+{%block heading%}
+<h1>Sorry, theres no album here</h1>
+{%endblock%}
+
+{% block body %}
+<!-- Return button -->
+<a href="{{ url_for('mainroot') }}">Return to homepage</a>
+{%endblock%}
+
+{% block java %}
+
+{%endblock%}

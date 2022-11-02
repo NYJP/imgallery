@@ -1,0 +1,98 @@
+{% extends "template.html" %}
+
+{% block title %}
+Online Photo Album
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='edit.css') }}">
+{% endblock %}
+
+{%block heading%}
+<!-- Dynamic header based on the album being edited -->
+<h1>Online photo album maker [Editing {{title}}]</h1>
+{%endblock%}
+
+{% block body %}
+
+<!-- Return button -->
+<a href="{{ url_for('mainroot') }}">Return to homepage</a>
+<br><br>
+
+<!-- File upload -->
+Select Photos:<br>
+<input type='file' accept="image/*" id='files' multiple>
+<br><br>
+<button id='upload'>Upload</button>
+<div id='uploadstatus'></div>
+<br>
+
+<form action="{{ url_for('viewroot') }}" method="POST">
+
+  <!-- Hidden field filled up by JS to indicate number of images -->
+  <input type ='number' id='no_images' name='no_images' style='display:none;'>
+  <div id='display'>
+
+    <!-- Load existing images from album -->
+    {% for i in range(data['no_images']) %}
+      <div class="displayimg" id="{{i}}" style="background-image: url({{data['images'][i]}})">
+        <button class="displaydel" onclick="delimg(this)">x</button>
+        <input type="text" id="image{{i}}" name="image{{i}}" style="display: none;" value="{{data['images'][i]}}">
+        <input type="text" class="captions" placeholder="Caption for above image (optional)" name="caption{{i}}" id="caption{{i}}" value="{{data['captions'][i]}}" onload = "alert('hi')">
+      </div>
+    {% endfor %}
+
+  <!-- Hidden text input for title -->
+  </div>
+  <input type = 'text' id='title' name='title' value= "{{title}}" style='display:none;'>
+  <br><br>
+
+  Style options:
+  <table>
+    <tr>
+      <td>Title size: <br><input  type='range' min='20' max='50' value={{data['styles']['titlesize']}} id='titlesize' name='styletitlesize'></td>
+      <td>Caption size: <br><input  type='range' min='12' max='30' value={{data['styles']['captionsize']}} id='captionsize' name='stylecaptionsize'></td>
+      <td>
+        <!-- Set the dropdown options to the existing settings -->
+        Layout: <br><select  name='stylelayout' id='layout'>
+          {% if data['styles']['layout'] == 'one column' %}
+          <option value='one column' selected='selected'>one column</option>
+          <option value='two columns'>two columns</option>
+          {% else %}
+          <option value='one column'>one column</option>
+          <option value='two columns' selected='selected'>two columns</option>
+          {% endif %}
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td colspan=3>For the 'colour' fields, input the rgb values seperated by commas, or leave it as 'none' for a transparent color. Other alphabet will be ignored.
+    </tr>
+    <tr>
+      <td>Title font colour: <br><input onchange='updatesubmitstatus()' class = 'textstyles' type='text' value = {{data['styles']['titlecolour']}} placeholder='x,x,x' name='styletitlecolour' id='titlecolour'></td>
+      <td>Background colour: <br><input onchange='updatesubmitstatus()' class = 'textstyles' type='text' value = {{data['styles']['backgroundcolour']}} placeholder='x,x,x' name='stylebackgroundcolour' id='backgroundcolour'></td>
+      <td>Image border colour: <br><input onchange='updatesubmitstatus()' class = 'textstyles' type='text' value = {{data['styles']['imagebordercolour']}} placeholder='x,x,x' name='styleimagebordercolour' id='imagebordercolour'></td>
+
+    </tr>
+    <tr>
+      <td class='lasttd'>Caption background colour: <br><input onchange='updatesubmitstatus()' class = 'textstyles' type='text' value = {{data['styles']['captionbackgroundcolour']}} placeholder='x,x,x' name='stylecaptionbackgroundcolour' id='captionbackgroundcolour'></td>
+      <td class='lasttd'>Caption font colour: <br><input onchange='updatesubmitstatus()' class = 'textstyles' type='text' value = {{data['styles']['captionfontcolour']}} placeholder='x,x,x' name='stylecaptionfontcolour' id='captionfontcolour'></td>
+      <td class='lasttd'>Caption border colour: <br><input onchange='updatesubmitstatus()' class = 'textstyles' type='text' value = {{data['styles']['captionbordercolour']}} placeholder='x,x,x' name='stylecaptionbordercolour' id='captionbordercolour'></td>
+    </tr>
+    <tr>
+      <td colspan=3>
+        <input type='submit' id='submit' disabled>
+      </td>
+    </tr>
+    <tr>
+      <td id='submitstatus' colspan=3>
+        
+      </td>
+    </tr>
+  </table>
+</form>
+{%endblock%}
+
+{% block java %}
+<script src="{{ url_for('static', filename='edit.js') }}"></script>
+{%endblock%}
